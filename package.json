@@ -1,0 +1,87 @@
+{
+  "name": "mira-patient-intake-backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Mira Medical Patient Intake System API",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node ./src/server",
+    "start:prod": "pm2 start npm -- run prod",
+    "dev": "set DEBUG=api:* & nodemon --watch src/ --exec babel-node --inspect ./src/server",
+    "prod": "env DEBUG=api:* NODE_ENV=production PORT=3333 npm run build && node dist/server",
+    "build": "babel src --delete-dir-on-start -d dist --copy-files --no-copy-ignored",
+    "lint:eslint": "eslint src/",
+    "lint:eslint:fix": "npm run lint:eslint -- . --fix",
+    "lint:staged": "lint-staged",
+    "prettify": "prettier --write"
+  },
+  "author": "Syed Ali Hamza <hamza.syed9995@gmail.com>",
+  "license": "ISC",
+  "lint-staged": {
+    "*.js": [
+      "npm run lint:eslint:fix",
+      "git add --force"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add --force"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:staged"
+    }
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.5",
+    "@babel/register": "^7.12.10",
+    "aws-sdk": "^2.922.0",
+    "babel-core": "^6.26.3",
+    "bull": "^4.12.2",
+    "cors": "^2.8.5",
+    "debug": "^4.3.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-acl": "^2.0.8",
+    "express-jwt": "^8.4.1",
+    "express-session": "^1.17.3",
+    "express-static": "^1.2.6",
+    "google-auth-library": "^9.0.0",
+    "handlebars": "^4.7.8",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1",
+    "nodemailer": "^6.9.7",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.11.3",
+    "sequelize": "^6.35.0",
+    "sequelize-cli": "^6.6.2",
+    "swagger-ui": "^5.10.0",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^9.0.1",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/plugin-proposal-private-methods": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
+    "nodemon": "^1.19.4",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2"
+  }
+}
