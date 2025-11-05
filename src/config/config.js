@@ -2,23 +2,26 @@ import 'dotenv/config';
 
 module.exports = {
   development: {
-    // dialect: 'sqlite',
-    // storage: './db.development.sqlite'
-
-    username: process.env.DB_USERNAME || 'postgres',
-    password: process.env.DB_PASSWORD || 'datics@123',
-    database: process.env.DB_NAME || 'postgres',
-    host: process.env.DB_HOSTNAME || 'localhost',
+    username: process.env.DB_USER || 'sa',
+    password: process.env.DB_PASSWORD || 'YourPassword123!',
+    database: process.env.DB_NAME || 'mira_local',
+    host: process.env.DB_HOST || 'localhost',
     type: 'default',
-    port: process.env.DB_PORT || 5432,
-    dialect: 'postgres',
+    port: process.env.DB_PORT || 1433,
+    dialect: process.env.DB_DIALECT || 'mssql',
+    dialectOptions: {
+      options: {
+        encrypt: process.env.DB_ENCRYPT === 'true',
+        trustServerCertificate: process.env.DB_TRUST_CERT === 'true',
+        enableArithAbort: true,
+      },
+    },
     pool: {
       max: 20,
       min: 0,
       acquire: 120000,
       idle: 10000,
     },
-    schema: process.env.SCHEMA_NAME || 'funtown',
     logging: false,
   },
   test: {
@@ -26,14 +29,20 @@ module.exports = {
     storage: ':memory:',
   },
   production: {
-    username: process.env.DB_USERNAME,
+    username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    host: process.env.DB_HOSTNAME,
+    host: process.env.DB_HOST,
     type: 'default',
     port: process.env.DB_PORT,
-    dialect: 'postgres',
-    schema: process.env.SCHEMA_NAME,
+    dialect: process.env.DB_DIALECT || 'mssql',
+    dialectOptions: {
+      options: {
+        encrypt: process.env.DB_ENCRYPT === 'true',
+        trustServerCertificate: process.env.DB_TRUST_CERT === 'true',
+        enableArithAbort: true,
+      },
+    },
     logging: false,
   },
 };
