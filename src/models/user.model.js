@@ -2,14 +2,7 @@ import { Model } from 'sequelize';
 
 export default (sequelize, { STRING, INTEGER, ENUM, VIRTUAL, DATEONLY, BOOLEAN, DATE, TEXT }) => {
   class User extends Model {
-    static associate({ FileResource }) {
-      this.hasMany(FileResource, {
-        foreignKey: 'createdBy',
-      });
-      this.hasMany(FileResource, {
-        foreignKey: 'updatedBy',
-      });
-    }
+    static associate() {}
   }
 
   User.init(

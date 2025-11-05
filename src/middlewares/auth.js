@@ -1,5 +1,4 @@
 import { expressjwt as jwt } from 'express-jwt';
-import { ENDPOINTS_WITHOUT_AUTH_HEADER } from '../utils/constants';
 
 export const getTokenFromHeaders = (req) => {
   const {
@@ -7,12 +6,6 @@ export const getTokenFromHeaders = (req) => {
   } = req;
   if (authorization && authorization.split(' ')[0] === 'Bearer') {
     return authorization.split(' ')[1];
-  }
-  if (
-    ENDPOINTS_WITHOUT_AUTH_HEADER.some((endpoint) => req.url.includes(endpoint)) &&
-    req.query.token
-  ) {
-    return req.query.token;
   }
   return null;
 };

@@ -14,13 +14,13 @@ const Request = (target, key, descriptor) => {
   };
 };
 
-const RequestBodyValidator = (validatePayloadFunc) => {
+const RequestBodyValidator = (schema) => {
   const actualDecorator = (target, key, descriptor) => {
     const controllerFunc = descriptor.value;
     // eslint-disable-next-line no-param-reassign
     descriptor.value = (...args) => {
       const [req] = args;
-      const result = validatePayloadFunc(req);
+      const result = schema.validate(req.body);
       if (result.error) {
         BadRequestError(getErrorMessages(result), STATUS_CODES.INVALID_INPUT);
       }

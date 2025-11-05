@@ -1,10 +1,7 @@
 'use strict';
 module.exports = {
-  up: async (queryInterface, { INTEGER, STRING, DATE, DATEONLY, ENUM }) => {
-    await queryInterface.createTable({
-      tableName: 'Users',
-      schema: process.env.SCHEMA_NAME,
-    }, {
+  up: async (queryInterface, { INTEGER, STRING, DATE, DATEONLY, ENUM, BOOLEAN }) => {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -39,17 +36,10 @@ module.exports = {
         type: STRING,
         allowNull: true,
       },
-      title: {
-        type: STRING,
-        allowNull: true,
-      },
-      location: {
-        type: STRING,
-        allowNull: true,
-      },
-      department: {
-        type: STRING,
-        allowNull: true,
+      isAdmin: {
+        type: BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       role: {
         type: ENUM('admin', 'user'),
@@ -60,8 +50,17 @@ module.exports = {
       avatar: {
         type: STRING,
       },
+      dob: {
+        type: DATEONLY,
+      },
       joiningDate: {
         type: DATEONLY,
+      },
+      lastActivity: {
+        type: DATE,
+      },
+      loginTime: {
+        type: DATE,
       },
       createdAt: {
         allowNull: false,

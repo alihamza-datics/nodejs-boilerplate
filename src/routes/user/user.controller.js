@@ -1,4 +1,3 @@
-import Joi from 'joi';
 import passport from 'passport';
 import express from 'express';
 import models from '../../models';
@@ -36,7 +35,6 @@ class UserController {
     const {
       query: { searchString, name, sortColumn, sortOrder, pageNumber = 1, pageSize = PAGE_SIZE },
     } = req;
-
     try {
       if (pageNumber <= 0) {
         return BadRequestError('Invalid page number', STATUS_CODES.INVALID_INPUT);
@@ -109,7 +107,7 @@ class UserController {
   static async createUser(req, res, next) {
     const { body: userPayload } = req;
     try {
-      const result = Joi.validate(userPayload, userSignUpSchema);
+      const result = userSignUpSchema.validate(userPayload);
       if (result.error) {
         return BadRequestError(getErrorMessages(result), STATUS_CODES.INVALID_INPUT);
       }

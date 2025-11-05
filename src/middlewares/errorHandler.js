@@ -17,7 +17,7 @@ const handleErrors = (err, req, res, next) => {
     });
   }
 
-  if (err?.original?.code === STATUS_CODES.FORIEGN_KEY_VIOLATION) {
+  if (err?.original?.code === STATUS_CODES.FOREIGN_KEY_VIOLATION) {
     const constraintMessage = err?.original?.constraint || 'Foreign key constraint violation';
     return res.status(STATUS_CODES.NOTFOUND).json({
       status: 'error',

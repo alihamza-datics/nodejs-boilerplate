@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import debugObj from 'debug';
 import http from 'http';
 import WebSocket from 'ws';

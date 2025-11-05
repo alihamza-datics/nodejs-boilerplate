@@ -3,23 +3,23 @@ import 'dotenv/config';
 module.exports = {
   development: {
     username: process.env.DB_USER || 'sa',
-    password: process.env.DB_PASSWORD || 'YourPassword123!',
+    password: process.env.DB_PASSWORD || 'admin',
     database: process.env.DB_NAME || 'mira_local',
     host: process.env.DB_HOST || 'localhost',
-    type: 'default',
-    port: process.env.DB_PORT || 1433,
-    dialect: process.env.DB_DIALECT || 'mssql',
+    port: parseInt(process.env.DB_PORT) || 1433,
+    dialect: 'mssql',
     dialectOptions: {
       options: {
-        encrypt: process.env.DB_ENCRYPT === 'true',
-        trustServerCertificate: process.env.DB_TRUST_CERT === 'true',
+        encrypt: false,
+        trustServerCertificate: true,
         enableArithAbort: true,
+        requestTimeout: 30000,
       },
     },
     pool: {
-      max: 20,
+      max: 5,
       min: 0,
-      acquire: 120000,
+      acquire: 30000,
       idle: 10000,
     },
     logging: false,
